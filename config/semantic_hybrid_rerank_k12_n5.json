@@ -1,0 +1,25 @@
+{
+  "experiment_name": "semantic_hybrid_rerank_k12_n5",
+  "chunking": {
+    "strategy": "semantic",
+    "params": {
+      "chunk_size": 100,
+      "embedding": "openai://text-embedding-3-small",
+      "threshold": 0.8,
+      "similarity_window": 3,
+      "skip_window": 1
+    }
+  },
+  "retrieval": {
+    "method": "hybrid",
+    "params": {
+      "reranking": true,
+      "top_k": 12,
+      "top_n": 5
+    }
+  },
+  "model": {
+    "generation": "gpt-5.4-mini",
+    "evaluation": "gpt-5.4-mini"
+  }
+}

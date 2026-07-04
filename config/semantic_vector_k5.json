@@ -1,0 +1,24 @@
+{
+  "experiment_name": "semantic_vector_k5",
+  "chunking": {
+    "strategy": "semantic",
+    "params": {
+      "chunk_size": 100,
+      "embedding": "openai://text-embedding-3-small",
+      "threshold": 0.8,
+      "similarity_window": 3,
+      "skip_window": 1
+    }
+  },
+  "retrieval": {
+    "method": "vector",
+    "params": {
+      "reranking": false,
+      "top_k": 5
+    }
+  },
+  "model": {
+    "generation": "gpt-5.4-mini",
+    "evaluation": "gpt-5.4-mini"
+  }
+}

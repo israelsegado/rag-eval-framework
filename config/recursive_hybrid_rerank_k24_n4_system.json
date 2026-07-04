@@ -1,0 +1,22 @@
+{
+  "experiment_name": "recursive_hybrid_rerank_k24_n4_system",
+  "chunking": {
+    "strategy": "recursive",
+    "params": {
+      "chunk_size": 800,
+      "chunk_overlap": 150
+    }
+  },
+  "retrieval": {
+    "method": "hybrid",
+    "params": {
+      "reranking": true,
+      "top_k": 24,
+      "top_n": 4
+    }
+  },
+  "model": {
+    "generation": "gpt-4o-mini",
+    "evaluation": "gpt-5.4-nano"
+  }
+}

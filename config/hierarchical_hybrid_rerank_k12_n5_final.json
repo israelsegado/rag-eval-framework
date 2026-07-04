@@ -1,0 +1,24 @@
+{
+  "experiment_name": "hierarchical_hybrid_rerank_k12_n5_final",
+  "chunking": {
+    "strategy": "hierarchical",
+    "params": {
+      "parent_chunks": 1000,
+      "parent_overlap": 100,
+      "child_chunks": 350,
+      "child_overlap": 35
+    }
+  },
+  "retrieval": {
+    "method": "hybrid",
+    "params": {
+      "reranking": true,
+      "top_k": 12,
+      "top_n": 5
+    }
+  },
+  "model": {
+    "generation": "gpt-5.4-mini",
+    "evaluation": "gpt-5.4-mini"
+  }
+}

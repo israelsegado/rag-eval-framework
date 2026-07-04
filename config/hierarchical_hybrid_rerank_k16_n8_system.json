@@ -1,0 +1,24 @@
+{
+  "experiment_name": "hierarchical_hybrid_rerank_k16_n8_system",
+  "chunking": {
+    "strategy": "hierarchical",
+    "params": {
+      "parent_chunks": 1000,
+      "parent_overlap": 100,
+      "child_chunks": 350,
+      "child_overlap": 35
+    }
+  },
+  "retrieval": {
+    "method": "hybrid",
+    "params": {
+      "reranking": true,
+      "top_k": 16,
+      "top_n": 8
+    }
+  },
+  "model": {
+    "generation": "gpt-4o-mini",
+    "evaluation": "gpt-5.4-nano"
+  }
+}
