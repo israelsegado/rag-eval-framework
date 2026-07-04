@@ -1,8 +1,6 @@
 import os
 import sys
 import json
-import asyncio
-import logging
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -21,7 +19,6 @@ from langchain_ollama import OllamaEmbeddings
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from tenacity import retry, stop_after_attempt, wait_exponential
 from ragas.run_config import RunConfig
-from datalake import DataLakeAdapter, DataLakeConfig
 
 #-------------------------------------- CARGA DE CLAVES -------------------------------------------
 load_dotenv()
@@ -39,21 +36,6 @@ GEN_MODEL = "gpt-5.4-mini"
 CURRENT_DIR = Path(__file__).resolve().parent
 RESULTS_FILEPATH = CURRENT_DIR / "results" / "final_results"
 INTERMEDIATE_FILEPATH =  CURRENT_DIR / "results" / "intermediate_files"
-RESULTS_DATALAKE = "/resultados"
-
-async def upload_final_result_to_datalake(output_path: Path) -> None:
-    datalake = DataLakeAdapter(
-        DataLakeConfig(connection_string=os.getenv("CONNECTION_STRING"))
-    )
-    datalake._logger = logging.getLogger("datalake")
-
-    try:
-        await datalake.save_bytes(
-            data=output_path.read_bytes(),
-            relative_path=f"{RESULTS_DATALAKE}/{output_path.name}"
-        )
-    finally:
-        await datalake.close()
 
 llm = ChatOpenAI(
     model=GEN_MODEL,
@@ -135,10 +117,8 @@ for process_file in INTERMEDIATE_FILEPATH.glob("*.json"):
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump(output, f, ensure_ascii=False, indent=2)
 
-        asyncio.run(upload_final_result_to_datalake(output_path))
-
         print("Evaluación terminada con éxito.")
-        print(f"Resultados de {process_file.name} guardados en {RESULTS_FILEPATH} y subidos a Data Lake.")
+        print(f"Resultados de {process_file.name} guardados en {RESULTS_FILEPATH}.")
     except:
         print(f" XXX El achivo {process_file.name} no ha podido ser evaluado. XXX")
         import traceback

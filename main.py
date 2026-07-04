@@ -33,9 +33,6 @@ from azure.search.documents.indexes.models import (
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from requests.exceptions import RequestException
 from ssl import SSLError
-import asyncio
-import logging
-from datalake import DataLakeAdapter, DataLakeConfig
 
 #-------------------------------------- CARGA DE CLAVES -------------------------------------------
 load_dotenv()
@@ -66,39 +63,7 @@ if str(CURRENT_DIR) not in sys.path:
     sys.path.insert(0, str(CURRENT_DIR))
 
 CORPUS_FOLDER = CURRENT_DIR / "data" / "corpus"
-CORPUS_DATALAKE = "/corpus"
-
-async def download_corpus_from_datalake():
-    datalake = DataLakeAdapter(
-        DataLakeConfig(connection_string=os.getenv("CONNECTION_STRING"))
-    )
-    datalake._logger = logging.getLogger("datalake")
-
-    try:
-        CORPUS_FOLDER.mkdir(parents=True, exist_ok=True)
-
-        blobs = await datalake.list_blobs_by_prefix(CORPUS_DATALAKE)
-        pdf_blobs = [blob for blob in blobs if blob["name"].lower().endswith(".pdf")]
-
-        print(f"Descargando {len(pdf_blobs)} PDFs desde Data Lake...")
-
-        for blob in pdf_blobs:
-            blob_name = blob["name"].lstrip("/")
-            local_path = CORPUS_FOLDER / Path(blob_name).name
-
-            storage_path = datalake._normalize_storage_path(blob_name)
-            blob_client = datalake._get_blob_client(storage_path)
-
-            download_stream = await blob_client.download_blob()
-            local_path.write_bytes(await download_stream.readall())
-
-            print(f"PDF descargado: {local_path.name}")
-
-    finally:
-        await datalake.close()
-
-
-asyncio.run(download_corpus_from_datalake())
+CORPUS_FOLDER.mkdir(parents=True, exist_ok=True)
 
 def clean_extracted_text(text: str) -> str:
     """Del texto extraído lo limpia para que sea más fácil de entender por el LLM y no tener errores StringIO en RAGAS
