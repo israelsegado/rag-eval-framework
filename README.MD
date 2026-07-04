@@ -2,10 +2,10 @@
 
 Proyecto para comparar configuraciones de un sistema RAG sobre un corpus propio de PDFs. El flujo permite:
 
-- leer documentos colocados manualmente en `data/corpus`;
-- probar distintas estrategias de chunking y retrieval definidas en `config/*.json`;
-- generar respuestas sobre un golden dataset local;
-- evaluar los resultados con RAGAS;
+- leer documentos colocados manualmente en `data/corpus`
+- probar distintas estrategias de chunking y retrieval definidas en `config/*.json`
+- generar respuestas sobre un golden dataset local
+- evaluar los resultados con RAGAS
 - visualizar comparativas en un dashboard de Streamlit.
 
 ## Estructura
@@ -29,8 +29,6 @@ Proyecto para comparar configuraciones de un sistema RAG sobre un corpus propio 
 `-- requirements_eval.txt      # Dependencias de evaluacion y dashboard
 ```
 
-Las carpetas de datos y resultados se mantienen en git mediante archivos `.gitkeep`, pero sus contenidos reales quedan ignorados.
-
 ## Preparacion
 
 1. Crea y activa un entorno virtual.
@@ -47,7 +45,7 @@ pip install -r requirements_rag.txt
 pip install -r requirements_eval.txt
 ```
 
-3. Crea un archivo `.env` local con tus claves. No se sube a git.
+3. Crea un archivo `.env` local con tus claves.
 
 ```env
 OPENAI_API_KEY=tu_clave
