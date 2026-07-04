@@ -139,7 +139,3 @@ Este paso procesa los JSON intermedios y guarda resultados finales en `results/f
 ```powershell
 streamlit run dashboard.py
 ```
-
-## Archivos ignorados
-
-No se versionan los datos privados, resultados generados, entornos virtuales, caches, `.env` ni scripts locales privados como `datalake.py`, `main_recortado.py` y `pruebas_de_main.py`.
