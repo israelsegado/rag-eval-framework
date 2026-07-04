@@ -40,7 +40,7 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-2. Instala dependencias.
+2. Instala dependencias en dos requirements debido a errores de dependencias entre RAGAS y LangChain.
 
 ```powershell
 pip install -r requirements_rag.txt
