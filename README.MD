@@ -25,8 +25,8 @@ Proyecto para comparar configuraciones de un sistema RAG sobre un corpus propio 
 |-- main.py                    # Indexa, recupera y genera respuestas
 |-- evaluation_rag.py          # Evalua las respuestas con RAGAS
 |-- dashboard.py               # Dashboard para comparar resultados
-|-- requirements_rag.txt       # Dependencias del pipeline RAG
-`-- requirements_eval.txt      # Dependencias de evaluacion y dashboard
+|-- requirements_rag.txt       # Dependencias del pipeline RAG y dashboard
+`-- requirements_eval.txt      # Dependencias de evaluacion 
 ```
 
 ## Preparacion
